@@ -1,0 +1,58 @@
+{
+  "title": "Workshop Intro",
+  "theme": "dark",
+  "slides": [
+    {
+      "type": "hero",
+      "title": "The *Stupid Problems*\nYou Run Into",
+      "subtitle": "And how AI solves them better. A hands-on workshop.",
+      "badge": "Your Event Name - Your City",
+      "tags": ["Date", "Time", "Build. Ship. Demo."]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "Why we're here",
+      "title": "Every team has *the same problems*",
+      "cards": [
+        { "icon": "⏱️", "title": "Time wasted on repetition", "description": "Tasks that should take 5 minutes take 5 hours because nobody built the right tool." },
+        { "icon": "🧠", "title": "Knowledge locked in heads", "description": "One person knows how something works. When they're gone, so is the knowledge." },
+        { "icon": "🔁", "title": "Decisions made on gut", "description": "No data. No system. Just vibes - and then wondering why results are inconsistent." },
+        { "icon": "📋", "title": "Reports that go nowhere", "description": "Hours of work to produce something nobody reads or acts on." }
+      ]
+    },
+    {
+      "type": "code",
+      "eyebrow": "Today's approach",
+      "title": "You don't need to code.\nYou need to *describe.*",
+      "subtitle": "Claude Code turns plain English into working software. Your job is to understand the problem clearly enough to explain it.",
+      "code": "# This is all it takes to start\nclaude\n\n# Then just talk to it\n\"Build me a tool that takes a client meeting summary\nand generates a follow-up email in our tone of voice.\nInclude next steps and a subject line.\""
+    },
+    {
+      "type": "stats",
+      "eyebrow": "Today in numbers",
+      "title": "What you're *building today*",
+      "stats": [
+        { "value": "5", "label": "Hours to ship" },
+        { "value": "4", "label": "Pods building" },
+        { "value": "1", "label": "Live demo each" }
+      ],
+      "subtitle": "Done and working beats perfect and unfinished. You have until the end of the session."
+    },
+    {
+      "type": "steps",
+      "eyebrow": "The format",
+      "title": "How today *works*",
+      "steps": [
+        { "title": "Pick your problem", "description": "one real thing that wastes your team's time" },
+        { "title": "Define it clearly", "description": "one sentence: who has it, what it costs them" },
+        { "title": "Build with Claude Code", "description": "describe what you want, iterate fast" },
+        { "title": "Demo it live", "description": "3 minutes, show it working, tell the story" }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Come with a problem.\nLeave with something\n*that works.*",
+      "attribution": "Your Event Name - Your City - Your Date"
+    }
+  ]
+}
