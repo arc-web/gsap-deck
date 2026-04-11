@@ -1,0 +1,84 @@
+{
+  "title": "StellarPH Workshop Results",
+  "theme": "dark",
+  "slides": [
+    {
+      "type": "hero",
+      "title": "4 Pods. 5 Hours.\n*4 Working Apps.*",
+      "subtitle": "What happens when you give builders a problem, Claude Code, and a deadline.",
+      "badge": "StellarPH x KMC - Cebu IT Park",
+      "tags": ["April 10, 2026", "15 Attendees", "100% Ship Rate"]
+    },
+    {
+      "type": "cards",
+      "eyebrow": "What they built",
+      "title": "From idea to *working demo*",
+      "cards": [
+        { "icon": "🛒", "title": "TindaCheck", "description": "Grocery price comparison app with barcode scanner. Scan a product, compare unit prices across sizes and packs." },
+        { "icon": "🚌", "title": "Sakay Na!", "description": "Cebu jeepney route finder. Pick your origin and destination, get the right jeepney route." },
+        { "icon": "⏰", "title": "FitAlarm", "description": "GPS fitness alarm you can't snooze. Won't stop until you actually go for a run." },
+        { "icon": "💝", "title": "GiftMaster", "description": "Relationship intelligence PWA. Remembers birthdays, preferences, and suggests gifts." }
+      ]
+    },
+    {
+      "type": "stats",
+      "eyebrow": "The numbers",
+      "title": "What *5 hours* produced",
+      "stats": [
+        { "value": "4", "label": "Apps shipped" },
+        { "value": "40+", "label": "Commits" },
+        { "value": "2", "label": "Live on GitHub Pages" }
+      ],
+      "subtitle": "Every pod shipped something that works. Two were deployed live during the session."
+    },
+    {
+      "type": "steps",
+      "eyebrow": "How it worked",
+      "title": "The *format*",
+      "subtitle": "No lectures. No slides. Just building.",
+      "steps": [
+        { "title": "Pick your problem", "description": "what wastes your time at work?" },
+        { "title": "Define it in one sentence", "description": "who has this problem and why it hurts" },
+        { "title": "Build with Claude Code", "description": "describe what you want, iterate fast" },
+        { "title": "Demo it live", "description": "3 minutes, show it working, tell the story" }
+      ]
+    },
+    {
+      "type": "code",
+      "eyebrow": "The secret",
+      "title": "You don't need to *code*",
+      "subtitle": "You need to describe. Claude Code turns plain English into working software.",
+      "code": "# This is all it takes\nclaude\n\n# Then just talk to it\n\"Build me a tool that takes a client meeting summary\nand generates a follow-up email in our tone of voice.\nInclude next steps and a subject line.\""
+    },
+    {
+      "type": "compare",
+      "eyebrow": "The shift",
+      "title": "Before vs *after*",
+      "left": {
+        "title": "Traditional workshop",
+        "items": [
+          "3-hour lecture, 30 minutes to try",
+          "Everyone follows the same tutorial",
+          "Take-home: a half-finished todo app",
+          "Nobody uses it after the event"
+        ]
+      },
+      "leftType": "bad",
+      "right": {
+        "title": "This workshop",
+        "items": [
+          "15 minutes setup, 4 hours building",
+          "Every pod picks their own real problem",
+          "Take-home: a working app that solves your problem",
+          "Two apps deployed live before leaving"
+        ]
+      },
+      "rightType": "good"
+    },
+    {
+      "type": "quote",
+      "quote": "Come with a problem.\nLeave with something\n*that works.*",
+      "attribution": "StellarPH x KMC - Claude AI Workshop - Cebu, April 10, 2026"
+    }
+  ]
+}

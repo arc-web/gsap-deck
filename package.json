@@ -1,0 +1,17 @@
+{
+  "name": "gsap-deck",
+  "version": "1.0.0",
+  "description": "Generate stunning animated HTML presentations from JSON. GSAP-powered, self-contained, zero dependencies in output.",
+  "bin": {
+    "gsap-deck": "./bin/gsap-deck.js"
+  },
+  "scripts": {
+    "test": "node bin/gsap-deck.js build examples/demo.json -o /tmp/test-deck.html && open /tmp/test-deck.html"
+  },
+  "keywords": ["presentation", "gsap", "slides", "animated", "html"],
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "commander": "^14.0.3"
+  }
+}
