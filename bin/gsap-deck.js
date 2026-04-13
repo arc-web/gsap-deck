@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const { buildDeck } = require('../lib/build')
 const { listThemes } = require('../lib/themes')
+const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom } = require('../lib/publish')
 
 program
   .name('gsap-deck')
@@ -118,6 +119,62 @@ program
     fs.writeFileSync(outputPath, JSON.stringify(starter, null, 2) + '\n')
     console.log(`Created: ${outputPath}`)
     console.log(`Edit the file, then run: gsap-deck build ${opts.output} --open`)
+  })
+
+program
+  .command('publish <html>')
+  .description('Publish a presentation to a hosting target')
+  .option('-t, --target <target>', 'Target: github, repo, hostinger, vercel, custom', 'github')
+  .option('-s, --slug <slug>', 'URL slug (default: inferred from filename)')
+  .option('-r, --repo <owner/name>', 'Target repo (for --target repo)')
+  .option('-d, --domain <domain>', 'Custom domain (for hostinger/vercel)')
+  .option('-m, --method <method>', 'Deploy method for custom: scp, s3, netlify, cloudflare')
+  .option('--dest <destination>', 'Destination path for custom deploy')
+  .action(async (html, opts) => {
+    const htmlPath = path.resolve(html)
+    if (!fs.existsSync(htmlPath)) {
+      console.error(`File not found: ${htmlPath}`)
+      process.exit(1)
+    }
+
+    const slug = opts.slug || slugFromFile(htmlPath)
+
+    switch (opts.target) {
+      case 'github':
+        await publishToGitHub(htmlPath, slug)
+        break
+      case 'repo':
+        if (!opts.repo) {
+          console.error('--repo <owner/name> is required for target "repo"')
+          process.exit(1)
+        }
+        await publishToRepo(htmlPath, opts.repo)
+        break
+      case 'hostinger':
+        if (!opts.domain) {
+          console.error('--domain <domain> is required for target "hostinger"')
+          process.exit(1)
+        }
+        await publishToHostinger(htmlPath, opts.domain)
+        break
+      case 'vercel':
+        await publishToVercel(htmlPath, opts.domain)
+        break
+      case 'custom':
+        if (!opts.method) {
+          console.error('--method <scp|s3|netlify|cloudflare> is required for target "custom"')
+          process.exit(1)
+        }
+        if (!opts.dest && opts.method === 'scp') {
+          console.error('--dest <user@host:/path/> is required for SCP')
+          process.exit(1)
+        }
+        await publishCustom(htmlPath, opts.method, opts.dest)
+        break
+      default:
+        console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
+        process.exit(1)
+    }
   })
 
 program.parse()
