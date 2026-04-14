@@ -4,6 +4,7 @@ const { program } = require('commander')
 const fs = require('fs')
 const path = require('path')
 const { buildDeck } = require('../lib/build')
+const { buildStandardDeck } = require('../lib/standard-template')
 const { listThemes } = require('../lib/themes')
 const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom } = require('../lib/publish')
 
@@ -32,6 +33,30 @@ program
     const outputPath = path.resolve(opts.output)
     fs.writeFileSync(outputPath, html)
     console.log(`Built: ${outputPath} (${config.slides.length} slides, theme: ${config.theme || 'dark'})`)
+
+    if (opts.open) {
+      require('child_process').execSync(`open "${outputPath}"`)
+    }
+  })
+
+program
+  .command('build-standard <input>')
+  .description('Build a standard ARC Web 8-slide deck from minimal data JSON')
+  .option('-o, --output <path>', 'Output HTML file path', 'presentation.html')
+  .option('--open', 'Open in browser after build')
+  .action((input, opts) => {
+    const inputPath = path.resolve(input)
+    if (!fs.existsSync(inputPath)) {
+      console.error(`File not found: ${inputPath}`)
+      process.exit(1)
+    }
+
+    const data = JSON.parse(fs.readFileSync(inputPath, 'utf8'))
+    const config = buildStandardDeck(data)
+    const html = buildDeck(config)
+    const outputPath = path.resolve(opts.output)
+    fs.writeFileSync(outputPath, html)
+    console.log(`Built: ${outputPath} (${config.slides.length} slides, theme: ${config.theme})`)
 
     if (opts.open) {
       require('child_process').execSync(`open "${outputPath}"`)
