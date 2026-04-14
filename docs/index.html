@@ -133,70 +133,185 @@ blockquote::before { content:'\201C'; position:absolute; left:0; top:-10px; font
 <div id="slides">
 <div class="slide active" id="slide-1">
     
-    <div class="blob" style="width:435.06802534582584px;height:472.95354409133284px;background:var(--primary);top:-113.02570433078307px;right:-113.47900157251627px;opacity:0.07"></div>
-    <div class="blob" style="width:307.142547336979px;height:317.886363803837px;background:var(--accent);bottom:-118.70944196682515px;left:-48.60738313769559px;opacity:0.06"></div>
+    <div class="blob" style="width:537.861677431387px;height:502.7047337457079px;background:var(--primary);top:-140.44332453689574px;left:-90.06511075144242px;opacity:0.07"></div>
+    <div class="blob" style="width:338.9815209077216px;height:377.0496414333269px;background:var(--accent);bottom:-108.8240223096127px;left:-60.3499159555133px;opacity:0.06"></div>
     <div class="slide-content">
       <div class="hero-badge">ARC Web</div>
-      <h1>Gsap Deck<br>Delivering <span class="grad">impact</span></h1>
-      <div class="sub">Generate stunning animated HTML presentations from JSON. One command, self-contained output, zero runtime dependencies.</div>
-      <div class="tags-row"><span class="tag">JavaScript</span><span class="tag">Open Source</span><span class="tag">Production</span></div>
+      <h1>Gsap Deck<br><span class="grad">JavaScript</span></h1>
+      <div class="sub"><a href="https://arc-web.github.io/gsap-deck/"></div>
+      <div class="tags-row"><span class="tag">JavaScript</span><span class="tag">Open Source</span></div>
     </div>
   </div>
 
 <div class="slide" id="slide-2">
     
-    <div class="blob" style="width:404.4440489552464px;height:402.35243305967117px;background:var(--primary);top:-112.13417412344945px;left:-85.00257316529371px;opacity:0.07"></div>
-    <div class="blob" style="width:386.76570460124094px;height:384.6969085424827px;background:var(--accent);bottom:-111.03992603803623px;right:-53.934343539408616px;opacity:0.06"></div>
+    <div class="blob" style="width:450.21357850852814px;height:435.324524278968px;background:var(--primary);top:-128.4415909068325px;right:-105.42081826821351px;opacity:0.07"></div>
+    <div class="blob" style="width:310.28707867572797px;height:408.4395899434517px;background:var(--accent);bottom:-81.44126381422342px;right:-72.04191653830043px;opacity:0.06"></div>
     <div class="slide-content">
-      <div class="eyebrow">By the numbers</div>
-      <h2>Real <span class="grad">impact</span></h2>
-      <div class="stat-grid">
-    <div class="stat">
-      <div class="stat-number">,</div>
-      <div class="stat-label">self-contained output</div>
+      <div class="eyebrow">The problem</div>
+      <h2>What's <span class="grad">broken</span> without this</h2>
+      <div class="line"></div>
+      <div class="cards">
+    <div class="card">
+      <span class="card-icon">📝</span>
+      <div class="card-title">Presentation code is verbose</div>
+      <div class="card-desc">Building animated presentations requires hundreds of lines of HTML, CSS, and JavaScript boilerplate that obscures your actual content.</div>
     </div>
-    <div class="stat">
-      <div class="stat-number">,</div>
-      <div class="stat-label">zero runtime dependencies</div>
+    <div class="card">
+      <span class="card-icon">🔗</span>
+      <div class="card-title">Dependencies bloat deployments</div>
+      <div class="card-desc">Most presentation tools require runtime libraries loaded from CDNs, adding latency and creating external dependencies for a static output.</div>
     </div>
-    <div class="stat">
-      <div class="stat-number">,</div>
-      <div class="stat-label">gradient text</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">,</div>
-      <div class="stat-label">animated particles</div>
+    <div class="card">
+      <span class="card-icon">🎨</span>
+      <div class="card-title">Animation setup is tedious</div>
+      <div class="card-desc">Coordinating staggered animations, transitions, and particle effects across slides demands deep knowledge of animation libraries and timing functions.</div>
     </div></div>
-      
     </div>
   </div>
 
 <div class="slide" id="slide-3">
     
-    <div class="blob" style="width:419.8975656956202px;height:412.7448156498176px;background:var(--primary);top:-120.61641249118333px;right:-112.03227900774893px;opacity:0.07"></div>
-    <div class="blob" style="width:366.479358245125px;height:347.68161164222107px;background:var(--accent);bottom:-76.45483302303751px;right:-78.08121159335361px;opacity:0.06"></div>
+    <div class="blob" style="width:539.7437817238723px;height:589.2326248787058px;background:var(--primary);top:-92.1639957284967px;right:-100.59674520989188px;opacity:0.07"></div>
+    <div class="blob" style="width:406.32224342363975px;height:431.6307480139907px;background:var(--accent);bottom:-72.44460137905853px;right:-69.2810945527643px;opacity:0.06"></div>
     <div class="slide-content">
-      <div class="eyebrow">Under the hood</div>
-      <h2>How it <span class="grad">works</span></h2>
-      <div class="sub">Real code from the repository</div>
-      <div class="code-block"><div><span class=<span class="string">"comment"</span>># Create a starter config</span></div><div>gsap-deck scaffold</div><div></div><div><span class=<span class="string">"comment"</span>># Edit deck.json with your content</span></div><div></div><div><span class=<span class="string">"comment"</span>># Build and open</span></div><div>gsap-deck build deck.json --open</div></div>
+      <div class="eyebrow">The difference</div>
+      <h2>Why it <span class="grad">matters</span></h2>
+      
+      <div class="compare">
+        <div class="compare-col bad">
+      <div class="compare-head"><span class="cross">✗</span> Without</div>
+      <div class="compare-item">Manual work</div><div class="compare-item">Slow iteration</div><div class="compare-item">Repeated mistakes</div>
+    </div>
+        <div class="compare-col good">
+      <div class="compare-head"><span class="check">✓</span> With this</div>
+      <div class="compare-item">Single HTML file output with no runtime dependencies</div><div class="compare-item">GSAP animations baked in—no library loading at runtime</div><div class="compare-item">Eight built-in slide types and five themes eliminate design decisions</div>
+    </div>
+      </div>
     </div>
   </div>
 
 <div class="slide" id="slide-4">
     
-    <div class="blob" style="width:557.4940778734392px;height:506.37184847440915px;background:var(--primary);top:-153.6438814587678px;right:-117.43888091639081px;opacity:0.07"></div>
-    <div class="blob" style="width:366.6231575012052px;height:444.6088572788585px;background:var(--accent);bottom:-88.72819656266867px;left:-73.43924759925565px;opacity:0.06"></div>
+    <div class="blob" style="width:511.5846189190741px;height:469.7960954992529px;background:var(--primary);top:-107.44895459451088px;right:-86.05373794886522px;opacity:0.07"></div>
+    <div class="blob" style="width:323.43077462069965px;height:419.73830791366447px;background:var(--accent);bottom:-112.4844518009962px;left:-43.54825565827189px;opacity:0.06"></div>
     <div class="slide-content">
-      <blockquote>  subtitle: One-line description.,</blockquote>
+      <div class="eyebrow">Under the hood</div>
+      <h2>How it <span class="grad">works</span></h2>
+      
+      <div class="flow">
+    <div class="flow-step">
+      <div class="flow-icon" style="background:rgba(123,47,190,0.12);border:1px solid rgba(123,47,190,0.2)">📥</div>
+      <div class="flow-body">
+        <div class="flow-title">Write JSON config</div>
+        <div class="flow-desc">Define your slides, content, and theme choice in a simple JSON file with no animation syntax required.</div>
+        
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon" style="background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2)">⚙️</div>
+      <div class="flow-body">
+        <div class="flow-title">CLI compiles to HTML</div>
+        <div class="flow-desc">gsap-deck processes your JSON through GSAP animation definitions, embeds all CSS and JavaScript, and generates a single self-contained file.</div>
+        
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2)">📤</div>
+      <div class="flow-body">
+        <div class="flow-title">Ship standalone HTML</div>
+        <div class="flow-desc">Output is one HTML file with zero external dependencies—open in any browser, share via email, or host on any static server.</div>
+        
+      </div>
+    </div></div>
+    </div>
+  </div>
+
+<div class="slide" id="slide-5">
+    
+    <div class="blob" style="width:528.3906547905792px;height:477.4368958535519px;background:var(--primary);top:-130.10802652942652px;right:-81.71389281953797px;opacity:0.07"></div>
+    <div class="blob" style="width:412.5302933351727px;height:446.0337352176422px;background:var(--accent);bottom:-62.993461208925055px;left:-59.70427826919729px;opacity:0.06"></div>
+    <div class="slide-content">
+      <div class="eyebrow">What it does</div>
+      <h2>Core <span class="grad">capabilities</span></h2>
+      <div class="line"></div>
+      <div class="cards">
+    <div class="card">
+      <span class="card-icon">⚡</span>
+      <div class="card-title">Fast</div>
+      <div class="card-desc">Optimized for speed and efficiency.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Reliable</div>
+      <div class="card-desc">Built to work consistently.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔌</span>
+      <div class="card-title">Integrates</div>
+      <div class="card-desc">Works with your existing tools.</div>
+    </div></div>
+    </div>
+  </div>
+
+<div class="slide" id="slide-6">
+    
+    <div class="blob" style="width:594.4737520415599px;height:447.95266944828404px;background:var(--primary);top:-128.48322267311215px;left:-94.99219454694276px;opacity:0.07"></div>
+    <div class="blob" style="width:374.4059537965874px;height:363.63205661733707px;background:var(--accent);bottom:-69.56098243631801px;left:-71.85187519644693px;opacity:0.06"></div>
+    <div class="slide-content">
+      <blockquote>I can describe a presentation in JSON and get a fully animated, self-contained HTML file in seconds—no build pipeline, no dependency management, no animation code to write.</blockquote>
       <div class="line" style="margin-top:48px"></div>
       <div class="sub">arc-web/gsap-deck</div>
+    </div>
+  </div>
+
+<div class="slide" id="slide-7">
+    
+    <div class="blob" style="width:427.7745108900398px;height:546.0878926014097px;background:var(--primary);top:-126.71374365812483px;right:-78.5198012864182px;opacity:0.07"></div>
+    <div class="blob" style="width:424.7056366626365px;height:442.3225416715883px;background:var(--accent);bottom:-87.06425666667741px;right:-45.10065159248906px;opacity:0.06"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Codebase</div>
+      <h2>Built with <span class="grad">care</span></h2>
+      <div class="line"></div>
+      <div class="cards">
+    <div class="card">
+      <span class="card-icon">💻</span>
+      <div class="card-title">JavaScript</div>
+      <div class="card-desc">Built in JavaScript for type safety and reliability.</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🏗️</span>
+      <div class="card-title">Architecture</div>
+      <div class="card-desc">CLI Tool</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">📦</span>
+      <div class="card-title">Key deps</div>
+      <div class="card-desc">commander</div>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔓</span>
+      <div class="card-title">Open Source (MIT / PolyForm)</div>
+      <div class="card-desc">Fork it, extend it, ship it. It's yours.</div>
+    </div></div>
+    </div>
+  </div>
+
+<div class="slide" id="slide-8">
+    
+    <div class="blob" style="width:452.12707770769174px;height:565.8193281045727px;background:var(--primary);top:-118.29447671948625px;right:-101.2808722180828px;opacity:0.07"></div>
+    <div class="blob" style="width:389.62206005437895px;height:432.1980140146182px;background:var(--accent);bottom:-79.86174473060444px;left:-66.17710215186219px;opacity:0.06"></div>
+    <div class="slide-content">
+      <div class="eyebrow">Built by</div>
+      <h2>Mike Ensor<br><span class="grad">Arc Web</span></h2>
+      <div class="sub">AI automation, marketing technology, building tools that work.</div>
+      <div class="body-text">Mike builds open-source AI tools for agencies, marketers, and operators who are done waiting for software to catch up. All Arc Web projects are open source by default — fork them, extend them, ship them.</div>
     </div>
   </div>
 </div>
 
 <div id="nav"></div>
-<div id="counter">1 / 4</div>
+<div id="counter">1 / 8</div>
 <div id="hint">\u2190 \u2192 arrow keys to navigate</div>
 
 <script>
