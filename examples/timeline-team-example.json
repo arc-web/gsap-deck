@@ -1,0 +1,70 @@
+{
+  "title": "New Slide Types Demo",
+  "theme": "dark",
+  "slides": [
+    {
+      "type": "hero",
+      "title": "Timeline & *Team* Slides",
+      "subtitle": "Two new slide types for roadmaps and people.",
+      "badge": "gsap-deck",
+      "tags": ["New", "v1.1"]
+    },
+    {
+      "type": "timeline",
+      "eyebrow": "Roadmap",
+      "title": "What's *next*",
+      "timeline": [
+        {
+          "date": "2026-Q1",
+          "title": "Foundation",
+          "description": "Core CLI, 8 slide types, 5 themes, GitHub publish flow.",
+          "done": true
+        },
+        {
+          "date": "2026-Q2",
+          "title": "Author Experience",
+          "description": "Watch command with live-reload, validate command, fetch-deps.",
+          "done": true
+        },
+        {
+          "date": "2026-Q3",
+          "title": "New Slide Types",
+          "description": "Timeline and team slides. PDF export via headless browser."
+        },
+        {
+          "date": "2026-Q4",
+          "title": "In-tool Grading",
+          "description": "gsap-deck grade and gsap-deck verify — quality measurement built in."
+        }
+      ]
+    },
+    {
+      "type": "team",
+      "eyebrow": "The people",
+      "title": "Built by *humans*",
+      "subtitle": "Small team, big output.",
+      "team": [
+        {
+          "name": "Mike Ensor",
+          "role": "Founder",
+          "note": "AI automation, marketing tech, open-source tools."
+        },
+        {
+          "name": "Arc Web",
+          "role": "Studio",
+          "note": "Open-source by default. Fork it, ship it."
+        },
+        {
+          "name": "You?",
+          "role": "Contributor",
+          "note": "Pull requests welcome."
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "quote": "Ship the roadmap.\nBuild the *team.*",
+      "attribution": "arc-web/gsap-deck"
+    }
+  ]
+}
