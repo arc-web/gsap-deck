@@ -10,6 +10,8 @@ const { listThemes } = require('../lib/themes')
 const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
 const { watchDeck } = require('../lib/watch')
 
+// export-pdf is loaded lazily in the command action (puppeteer optional peer dep)
+
 program
   .name('gsap-deck')
   .description('Generate stunning animated HTML presentations from JSON')
@@ -69,6 +71,21 @@ program
     if (opts.open) {
       require('child_process').execSync(`open "${outputPath}"`)
     }
+  })
+
+program
+  .command('export-pdf <html>')
+  .description('Export a presentation to PDF (requires: npm install puppeteer)')
+  .option('-o, --output <path>', 'Output PDF path', 'presentation.pdf')
+  .action(async (html, opts) => {
+    const htmlPath = path.resolve(html)
+    if (!fs.existsSync(htmlPath)) {
+      console.error(`File not found: ${htmlPath}`)
+      process.exit(1)
+    }
+    const outputPath = path.resolve(opts.output)
+    const { exportPdf } = require('../lib/export-pdf')
+    await exportPdf(htmlPath, outputPath)
   })
 
 program
