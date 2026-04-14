@@ -7,7 +7,7 @@ const { buildDeck } = require('../lib/build')
 const { buildStandardDeck, validateData } = require('../lib/standard-template')
 const { fetchDeps } = require('../lib/fetch-deps')
 const { listThemes } = require('../lib/themes')
-const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
+const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishToCloudflare, publishCustom, publishAllStandard } = require('../lib/publish')
 const { watchDeck } = require('../lib/watch')
 
 // export-pdf is loaded lazily in the command action (puppeteer optional peer dep)
@@ -174,10 +174,11 @@ program
 program
   .command('publish <html>')
   .description('Publish a presentation to a hosting target')
-  .option('-t, --target <target>', 'Target: github, repo, hostinger, vercel, custom', 'github')
+  .option('-t, --target <target>', 'Target: github, repo, hostinger, vercel, cloudflare, custom', 'github')
   .option('-s, --slug <slug>', 'URL slug (default: inferred from filename)')
   .option('-r, --repo <owner/name>', 'Target repo (for --target repo)')
-  .option('-d, --domain <domain>', 'Custom domain (for hostinger/vercel)')
+  .option('-d, --domain <domain>', 'Custom domain (for hostinger/vercel/cloudflare)')
+  .option('-p, --project <name>', 'Cloudflare Pages project name (default: gsap-deck-live)')
   .option('-m, --method <method>', 'Deploy method for custom: scp, s3, netlify, cloudflare')
   .option('--dest <destination>', 'Destination path for custom deploy')
   .action(async (html, opts) => {
@@ -210,6 +211,9 @@ program
       case 'vercel':
         await publishToVercel(htmlPath, opts.domain)
         break
+      case 'cloudflare':
+        await publishToCloudflare(htmlPath, { domain: opts.domain, project: opts.project })
+        break
       case 'custom':
         if (!opts.method) {
           console.error('--method <scp|s3|netlify|cloudflare> is required for target "custom"')
@@ -222,7 +226,7 @@ program
         await publishCustom(htmlPath, opts.method, opts.dest)
         break
       default:
-        console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
+        console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, cloudflare, custom`)
         process.exit(1)
     }
   })
