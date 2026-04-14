@@ -6,7 +6,7 @@ const path = require('path')
 const { buildDeck } = require('../lib/build')
 const { buildStandardDeck } = require('../lib/standard-template')
 const { listThemes } = require('../lib/themes')
-const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom } = require('../lib/publish')
+const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
 
 program
   .name('gsap-deck')
@@ -200,6 +200,27 @@ program
         console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
         process.exit(1)
     }
+  })
+
+program
+  .command('update-all <data-dir>')
+  .description('Build + publish every *.json data file in a directory via the standard template')
+  .option('-o, --owner <owner>', 'GitHub org/user (infers repo as owner/{filename})', 'arc-web')
+  .option('-c, --concurrency <n>', 'Parallel publishes', (v) => parseInt(v, 10), 5)
+  .option('--skip <names>', 'Comma-separated data file basenames to skip')
+  .action(async (dataDir, opts) => {
+    const resolved = path.resolve(dataDir)
+    if (!fs.existsSync(resolved)) {
+      console.error(`Directory not found: ${resolved}`)
+      process.exit(1)
+    }
+    const archived = opts.skip ? opts.skip.split(',').map(s => s.trim()).filter(Boolean) : []
+    const result = await publishAllStandard(resolved, {
+      owner: opts.owner,
+      concurrency: opts.concurrency,
+      archived,
+    })
+    if (result.failed.length) process.exit(1)
   })
 
 program.parse()
