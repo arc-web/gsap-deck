@@ -8,10 +8,24 @@
   "scripts": {
     "test": "node bin/gsap-deck.js build examples/demo.json -o /tmp/test-deck.html && open /tmp/test-deck.html"
   },
-  "keywords": ["presentation", "gsap", "slides", "animated", "html"],
+  "keywords": [
+    "presentation",
+    "gsap",
+    "slides",
+    "animated",
+    "html"
+  ],
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
     "commander": "^14.0.3"
+  },
+  "peerDependencies": {
+    "puppeteer": ">=21.0.0"
+  },
+  "peerDependenciesMeta": {
+    "puppeteer": {
+      "optional": true
+    }
   }
 }
