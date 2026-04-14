@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const { buildDeck } = require('../lib/build')
 const { buildStandardDeck, validateData } = require('../lib/standard-template')
+const { fetchDeps } = require('../lib/fetch-deps')
 const { listThemes } = require('../lib/themes')
 const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
 
@@ -205,6 +206,59 @@ program
       default:
         console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
         process.exit(1)
+    }
+  })
+
+program
+  .command('fetch-deps [owner/repo]')
+  .description('Fetch top dependencies from a GitHub repo (package.json / requirements.txt / Cargo.toml)')
+  .option('-u, --update <data.json>', 'Update the `deps` field in this data JSON file')
+  .option('-a, --all <data-dir>', 'Batch mode: update every *.json in this directory')
+  .option('-o, --owner <owner>', 'Org/user for batch mode (used with --all)', 'arc-web')
+  .option('-l, --limit <n>', 'Max deps to return', (v) => parseInt(v, 10), 5)
+  .action(async (ownerRepo, opts) => {
+    if (opts.all) {
+      const dir = path.resolve(opts.all)
+      if (!fs.existsSync(dir)) { console.error(`Directory not found: ${dir}`); process.exit(1) }
+      const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'))
+      let updated = 0, skipped = 0
+      for (const f of files) {
+        const name = f.replace(/\.json$/, '')
+        const repo = `${opts.owner}/${name}`
+        const { manifest, deps } = await fetchDeps(repo, { limit: opts.limit })
+        if (!deps.length) {
+          console.log(`  [-] ${name.padEnd(35)} no manifest found`)
+          skipped++
+          continue
+        }
+        const dataPath = path.join(dir, f)
+        const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
+        data.deps = deps
+        fs.writeFileSync(dataPath, JSON.stringify(data, null, 2))
+        console.log(`  [\u2713] ${name.padEnd(35)} ${manifest.padEnd(18)} ${deps.join(', ')}`)
+        updated++
+      }
+      console.log(`\nUpdated ${updated}; skipped ${skipped} (no manifest)`)
+      return
+    }
+
+    if (!ownerRepo || !ownerRepo.includes('/')) {
+      console.error('Provide <owner/repo>, or use --all <data-dir> for batch mode')
+      process.exit(1)
+    }
+    const { manifest, deps } = await fetchDeps(ownerRepo, { limit: opts.limit })
+    if (!deps.length) {
+      console.log(`No manifest found for ${ownerRepo} (checked: package.json, requirements.txt, Cargo.toml)`)
+      process.exit(1)
+    }
+    console.log(`${manifest}: ${deps.join(', ')}`)
+    if (opts.update) {
+      const dataPath = path.resolve(opts.update)
+      if (!fs.existsSync(dataPath)) { console.error(`File not found: ${dataPath}`); process.exit(1) }
+      const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'))
+      data.deps = deps
+      fs.writeFileSync(dataPath, JSON.stringify(data, null, 2))
+      console.log(`Updated ${dataPath}`)
     }
   })
 
