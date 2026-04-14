@@ -340,4 +340,45 @@ program
     if (result.failed.length) process.exit(1)
   })
 
+program
+  .command('grade <data-dir>')
+  .description('Score every data JSON in a directory on content quality (0-100)')
+  .option('--full-deck', 'Treat files as pre-built full deck JSONs instead of data files')
+  .action((dataDir, opts) => {
+    const resolved = path.resolve(dataDir)
+    if (!fs.existsSync(resolved)) {
+      console.error(`Directory not found: ${resolved}`)
+      process.exit(1)
+    }
+    const { gradeAll, printGradeReport } = require('../lib/grade')
+    const results = gradeAll(resolved, { fullDeck: opts.fullDeck })
+    printGradeReport(results)
+    const below = results.filter(r => r.score < 70 && !r.earlyStage)
+    if (below.length) process.exit(1)
+  })
+
+program
+  .command('verify <data-dir>')
+  .description('Check each repo\'s live docs/index.html matches its expected content')
+  .option('-o, --owner <owner>', 'GitHub org/user', 'arc-web')
+  .option('--skip <names>', 'Comma-separated repo names to skip')
+  .option('-c, --concurrency <n>', 'Parallel checks', (v) => parseInt(v, 10), 8)
+  .action(async (dataDir, opts) => {
+    const resolved = path.resolve(dataDir)
+    if (!fs.existsSync(resolved)) {
+      console.error(`Directory not found: ${resolved}`)
+      process.exit(1)
+    }
+    const skip = opts.skip ? opts.skip.split(',').map(s => s.trim()).filter(Boolean) : []
+    const { verifyAll, printVerifyReport } = require('../lib/verify')
+    const results = await verifyAll(resolved, {
+      owner: opts.owner,
+      concurrency: opts.concurrency,
+      skip,
+    })
+    printVerifyReport(results)
+    const stale = results.filter(r => r.status === 'STALE')
+    if (stale.length) process.exit(1)
+  })
+
 program.parse()
