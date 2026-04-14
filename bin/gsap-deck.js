@@ -8,6 +8,7 @@ const { buildStandardDeck, validateData } = require('../lib/standard-template')
 const { fetchDeps } = require('../lib/fetch-deps')
 const { listThemes } = require('../lib/themes')
 const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
+const { watchDeck } = require('../lib/watch')
 
 program
   .name('gsap-deck')
@@ -207,6 +208,19 @@ program
         console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
         process.exit(1)
     }
+  })
+
+program
+  .command('watch <input>')
+  .description('Watch a JSON file and serve with live-reload at localhost:7555')
+  .option('-p, --port <port>', 'Port to serve on', (v) => parseInt(v, 10), 7555)
+  .action((input, opts) => {
+    const inputPath = path.resolve(input)
+    if (!fs.existsSync(inputPath)) {
+      console.error(`File not found: ${inputPath}`)
+      process.exit(1)
+    }
+    watchDeck(inputPath, { port: opts.port })
   })
 
 program
