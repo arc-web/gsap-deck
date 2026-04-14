@@ -4,7 +4,7 @@ const { program } = require('commander')
 const fs = require('fs')
 const path = require('path')
 const { buildDeck } = require('../lib/build')
-const { buildStandardDeck } = require('../lib/standard-template')
+const { buildStandardDeck, validateData } = require('../lib/standard-template')
 const { listThemes } = require('../lib/themes')
 const { slugFromFile, publishToGitHub, publishToRepo, publishToHostinger, publishToVercel, publishCustom, publishAllStandard } = require('../lib/publish')
 
@@ -52,6 +52,12 @@ program
     }
 
     const data = JSON.parse(fs.readFileSync(inputPath, 'utf8'))
+    const result = validateData(data)
+    if (!result.ok) {
+      console.error(`Validation failed for ${inputPath}:`)
+      result.errors.forEach(e => console.error(`  ${e.field.padEnd(20)} ${e.message}`))
+      process.exit(1)
+    }
     const config = buildStandardDeck(data)
     const html = buildDeck(config)
     const outputPath = path.resolve(opts.output)
@@ -200,6 +206,32 @@ program
         console.error(`Unknown target: ${opts.target}. Use: github, repo, hostinger, vercel, custom`)
         process.exit(1)
     }
+  })
+
+program
+  .command('validate <input>')
+  .description('Check a standard-template data JSON for shape errors without building')
+  .action((input) => {
+    const inputPath = path.resolve(input)
+    if (!fs.existsSync(inputPath)) {
+      console.error(`File not found: ${inputPath}`)
+      process.exit(1)
+    }
+    let data
+    try {
+      data = JSON.parse(fs.readFileSync(inputPath, 'utf8'))
+    } catch (e) {
+      console.error(`Invalid JSON: ${e.message}`)
+      process.exit(1)
+    }
+    const result = validateData(data)
+    if (result.ok) {
+      console.log(`PASS  ${inputPath}`)
+      return
+    }
+    console.log(`FAIL  ${inputPath}`)
+    result.errors.forEach(e => console.log(`  ${e.field.padEnd(20)} ${e.message}`))
+    process.exit(1)
   })
 
 program
