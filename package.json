@@ -18,7 +18,8 @@
   "license": "MIT",
   "type": "commonjs",
   "dependencies": {
-    "commander": "^14.0.3"
+    "commander": "^14.0.3",
+    "cloudflare_deploy": "file:../../cloudflare_deploy"
   },
   "peerDependencies": {
     "puppeteer": ">=21.0.0"
